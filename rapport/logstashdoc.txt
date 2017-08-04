@@ -1,0 +1,25 @@
+docker pull docker.elastic.co/logstash/logstash:5.5.0
+docker run -it --name logstash docker.elastic.co/logstash/logstash bash
+autre terminal sur la vm
+docker commit logstash logstashdock
+quitter ce terminal
+sur le premier terminal
+opt/logstash/bin/logstash-plugin install logstash-input-kafka
+
+fichier test kafka-logstash-elastic.conf
+
+ input {
+   kafka {
+     zk_connect => "kafka:2181"
+     topic_id => "word-count"
+   }
+
+ output {
+   elasticsearch {
+     embedded => true
+   }
+ }
+
+
+
+sudo sysctl -w vm.max_map_count=262144

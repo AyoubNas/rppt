@@ -1,0 +1,47 @@
+ 
+
+Plan du rapport de stage : 
+
+- Remerciements
+
+- Intro : contexte du stage, motivations
+
+- Présentation de l'entreprise
+
+- Présentation du projet et des enjeux pour l'entreprise
+	
+	- gain de compétences sur les nouvelles techno,...
+ 
+
+- Attentes de l'entreprise pour le stage (missions-objectifs)
+
+	- mise en place architecture
+
+
+- Présentation de l'architecture
+
+	- schéma + explication du fonctionnement
+	- présentation des technologies
+	- technologies retenues pour Le POC
+	- Docker
+
+- déroulement du projet
+
+	- mise en place et difficultés rencontrées pour chaque image docker
+	- partie IOT-Hardware
+	- ...
+
+- Gestion de projet
+
+	- fonctionnement par objectifs 
+
+- Résultats obtenus
+	
+
+
+- Conclusion
+	
+	- enseignements tirés
+	- avis sur le stage
+
+	

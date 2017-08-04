@@ -1,0 +1,57 @@
+import kafka docker sur la VM CENTOS
+Lancer le dock kafka : docker run -i -t nom_du_docker /bin/bash
+se rendre dans /opt/kafka_2.11(...)/libs (cd)
+récupérer la librairie pour MQTT et sa dépendence : wget https://howtoprogram.xyz/wp-content/uploads/2016/07/kafka-mqtt-bin.zip (archive zip)
+recupérer la commande unzip : apt-get update && apt-get install unzip
+décompresser : unzip kafka-mqtt-bin.zip  => résultat : 2 archives .jar : kafka-connect-mqtt-1.0-SNAPSHOT.jar  et  org.eclipse.paho.client.mqttv3-1.0.2.jar
+supprimer l'archive .zip : rm kafka-mqtt-bin.zip
+récupérer vim ou un autre éditeur : apt-get install vim
+
+créer le fichier config mqtt.properties : touch mqtt.properties  (toujours dans le répertoire libs)
+
+vim mqtt.properties
+écrire le contenu suivant :   
+
+name=mqtt
+connector.class=com.evokly.kafka.connect.mqtt.MqttSourceConnector
+tasks.max=1
+
+kafka.topic=word-count
+mqtt.client_id=mqtt-kafka-123456789
+
+mqtt.clean_session=true
+mqtt.connection_timeout=30
+mqtt.keep_alive_intervall=60
+
+mqtt.server_uris=tcp://mqtt:1883
+mqtt.topic=hello-mqtt
+
+enregistrer le fichier
+
+
+pour lancer, s'assurer que mosquitto est en marche, puis depuis /opt/kafka_2.11-0.10.0.0  : 
+
+
+./bin/zookeeper-server-start.sh config/zookeeper.properties &
+
+./bin/kafka-server-start.sh config/server.properties &
+
+./bin/connect-standalone.sh config/connect-standalone.properties libs/mqtt.properties
+
+
+le dernier message doit être :
+
+[2017-06-16 08:20:57,510] INFO Reflections took 2989 ms to scan 64 urls, producing 2935 keys and 22324 values  (org.reflections.Reflections:229)
+
+
+pour voir les messages : se connecter au container kafka avec une autre console puis : 
+
+cd opt/kafka_2.11(...)
+
+
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic hello-mqtt-kafka
+
+
+
+ 
+

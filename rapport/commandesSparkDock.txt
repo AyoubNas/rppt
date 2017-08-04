@@ -1,0 +1,19 @@
+docker pull antlypls/spark:1.5.1  (patienter !)
+docker run -it --name spark antlypls/spark bash
+mkdir app
+ouvrir un deuxième terminal sur la vm
+git clone https://github.com/antlypls/spark-kafka-docker-demo.git
+cd spark-kafka-docker
+sbt assembly   =>
+
+    - Si erreur :
+ 
+     cd ..
+     git clone https://github.com/AyoubNas/spark (provisoire)
+     docker cp spark/direct_kafka_word_count.jar spark:/app
+
+    - sinon :
+
+     docker cp target/scala-2.10/ spark:/app
+
+

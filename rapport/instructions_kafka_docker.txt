@@ -1,0 +1,51 @@
+docker pull wurstmeister/kafka
+
+
+docker run -it --name kafka wurstmeister/kafka bash
+
+    wget https://howtoprogram.xyz/wp-content/uploads/2016/07/kafka-mqtt-bin.zip 
+    wget https://oss.oracle.com/el4/unzip/unzip.tar
+    tar -xf unzip.tar
+    rm unzip.tar
+    mv unzip bin
+    chmod +x bin/unzip
+    unzip kafka-mqtt-bin.zip
+    rm kafka-mqtt-bin.zip
+    mv kafka-mqtt-bin/org.eclipse.paho.client.mqttv3-1.0.2.jar opt/kafka_2.12-0.10.2.1/libs/
+    rm -r kafka-mqtt-bin
+
+Dans un nouveau terminal sur la VM
+docker exec -it kafka bash
+cd 
+vi mqtt.properties (ou nano vim etc)
+
+name=mqtt
+connector.class=com.evokly.kafka.connect.mqtt.MqttSourceConnector
+tasks.max=1
+ 
+kafka.topic=hello-mqtt-kafka
+mqtt.client_id=mqtt-kafka-123456789
+ 
+mqtt.clean_session=true
+mqtt.connection_timeout=30
+mqtt.keep_alive_interval=60
+ 
+mqtt.server_uris=tcp://localhost:1883
+mqtt.topic=hello-mqtt
+
+exit
+docker ps
+docker commit kafka kafkadock
+
+
+
+
+
+
+
+
+
+
+
+
+
